@@ -8,10 +8,12 @@ import { useParams } from 'react-router-dom';
 
 import db from '../firebase';
 
+import Message from './Message';
+
 function Chat() {
   const { roomId } = useParams();
   const [roomDetails, setRoomDetails] = useState(null);
-  const [roomMessages, setRoomMessages] = useState(null);
+  const [roomMessages, setRoomMessages] = useState([]);
 
   useEffect(() => {
     if (roomId) {
@@ -46,6 +48,19 @@ function Chat() {
             Details
           </p>
         </div>
+      </div>
+      <div className="chat__messages">
+        {roomMessages.map(({ message, timestamp, user, userImage }) => {
+          return (
+            <Message
+              key={timestamp.seconds}
+              message={message}
+              timestamp={timestamp}
+              user={user}
+              userImage={userImage}
+            />
+          );
+        })}
       </div>
     </div>
   );
