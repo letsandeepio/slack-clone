@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import db from '../firebase';
 
 import Message from './Message';
+import ChatInput from './ChatInput';
 
 function Chat() {
   const { roomId } = useParams();
@@ -31,8 +32,6 @@ function Chat() {
       );
   }, [roomId]);
 
-  console.log(roomMessages);
-
   return (
     <div className="chat">
       <div className="chat__header">
@@ -53,7 +52,6 @@ function Chat() {
         {roomMessages.map(({ message, timestamp, user, userImage }) => {
           return (
             <Message
-              key={timestamp.seconds}
               message={message}
               timestamp={timestamp}
               user={user}
@@ -62,6 +60,7 @@ function Chat() {
           );
         })}
       </div>
+      <ChatInput channelName={roomDetails?.name} channelId={roomId} />
     </div>
   );
 }
