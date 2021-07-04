@@ -12,7 +12,7 @@ import Message from './Message';
 import ChatInput from './ChatInput';
 
 function Chat() {
-  const { roomId } = useParams();
+  const { roomId } = useParams<{roomId: string}>();
   const [roomDetails, setRoomDetails] = useState(null);
   const [roomMessages, setRoomMessages] = useState([]);
 
